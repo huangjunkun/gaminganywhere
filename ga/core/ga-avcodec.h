@@ -35,6 +35,16 @@ extern "C" {
 #define	SWR_CH_MAX	32
 #endif
 
+#ifndef CODEC_FLAG_GLOBAL_HEADER
+#define CODEC_FLAG_GLOBAL_HEADER   AV_CODEC_FLAG_GLOBAL_HEADER
+#endif
+#ifndef CODEC_CAP_TRUNCATED
+#define CODEC_CAP_TRUNCATED   AV_CODEC_CAP_TRUNCATED
+#endif
+#ifndef CODEC_FLAG_TRUNCATED
+#define CODEC_FLAG_TRUNCATED   AV_CODEC_FLAG_TRUNCATED
+#endif
+
 #include <map>
 #include <string>
 #include <vector>

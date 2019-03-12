@@ -41,8 +41,9 @@ all: $(PACKAGES)
 osx_brew:
 	brew install sdl2 sdl2_ttf yasm lame opus libogg libvorbis theora \
 		libvpx x264 x265 xvid
-	brew install --with-libvorbis --with-libvpx --with-opus \
-		--with-theora --with-x265 --with-tools ffmpeg
+	brew install ffmpeg
+	# brew install --with-libvorbis --with-libvpx --with-opus \
+	# 	--with-theora --with-x265 --with-tools ffmpeg
 
 linux_ubuntu:
 	@echo 'You will need root permissions to install packages'

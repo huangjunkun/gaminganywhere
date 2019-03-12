@@ -28,4 +28,5 @@ LOCAL_STATIC_LIBRARIES := \
 		theora theoradec theoraenc vpx
 LOCAL_SHARED_LIBRARIES := mp3lame opus ogg vorbis vorbisenc vorbisfile x264
 LOCAL_LDLIBS := -llog -lz -lGLESv1_CM 
+LOCAL_LDLIBS += -Wl,--no-warn-shared-textrel
 include $(BUILD_SHARED_LIBRARY)
