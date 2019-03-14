@@ -30,3 +30,6 @@ obj/
 .vscode/
 .project
 .settings
+.idea
+local.properties
+*.iml

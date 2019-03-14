@@ -29,4 +29,5 @@ LOCAL_STATIC_LIBRARIES := \
 LOCAL_SHARED_LIBRARIES := mp3lame opus ogg vorbis vorbisenc vorbisfile x264
 LOCAL_LDLIBS := -llog -lz -lGLESv1_CM 
 LOCAL_LDLIBS += -Wl,--no-warn-shared-textrel
+LOCAL_LDFLAGS += -fPIC
 include $(BUILD_SHARED_LIBRARY)
