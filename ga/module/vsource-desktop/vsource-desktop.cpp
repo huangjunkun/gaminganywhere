@@ -203,12 +203,13 @@ vsource_threadproc(void *arg) {
 		}
 	}
 	//
-	ga_error("video source thread started: tid=%ld\n", ga_gettid());
+	// ga_error("video source thread started: tid=%ld\n", ga_gettid());
 	gettimeofday(&initialTv, NULL);
 	lastTv = initialTv;
 	token = frame_interval;
 	while(vsource_started != 0) {
 		// encoder has not launched?
+		// ga_error("vsource_threadproc while: tid=%ld\n", ga_gettid());
 		if(encoder_running() == 0) {
 #ifdef WIN32
 			Sleep(1);
@@ -217,6 +218,7 @@ vsource_threadproc(void *arg) {
 #endif
 			gettimeofday(&lastTv, NULL);
 			token = frame_interval;
+			// ga_error("vsource_threadproc encoder_running: tid=%ld\n", ga_gettid());
 			continue;
 		}
 		// token bucket based capturing
@@ -233,6 +235,7 @@ vsource_threadproc(void *arg) {
 #else
 			usleep(1000);
 #endif
+			ga_error("vsource_threadproc token(%d) < frame_interval(%d): tid=%ld\n", token, frame_interval, ga_gettid());
 			continue;
 		}
 		token -= frame_interval;
@@ -298,6 +301,7 @@ vsource_threadproc(void *arg) {
 			dpipe_store(pipe[i], dupdata);
 		}
 		dpipe_store(pipe[0], data);
+		// ga_error("vsource_threadproc dpipe_store: tid=%ld\n", ga_gettid());
 		// reconfigured?
 		if(vsource_reconfigured != 0) {
 			frame_interval = (int) (1000000.0 * vsource_framerate_d / vsource_framerate_n);

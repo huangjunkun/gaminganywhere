@@ -1327,6 +1327,7 @@ play_audio(unsigned char *buffer, int bufsize, struct timeval pts) {
 
 void *
 rtsp_thread(void *param) {
+	ga_error("vrtsp_thread\n");
 	RTSPClient *client = NULL;
 	BasicTaskScheduler0 *bs = BasicTaskScheduler::createNew();
 	TaskScheduler* scheduler = bs;
@@ -1388,9 +1389,11 @@ rtsp_thread(void *param) {
 	//
 	if((client = openURL(*env, rtspParam->url)) == NULL) {
 		deinit_decoder_buffer();
+		ga_error("connect to %s failed.\n", rtspParam->url);
 		rtsperror("connect to %s failed.\n", rtspParam->url);
 		return NULL;
 	}
+	ga_error("openURL success\n");
 	while(rtspParam->quitLive555 == 0) {
 		bs->SingleStep(1000000);
 	}
@@ -1487,6 +1490,7 @@ private:
 
 RTSPClient *
 openURL(UsageEnvironment& env, char const* rtspURL) {
+	ga_error("openURL rtspURL:%s\n", rtspURL);
 	RTSPClient* rtspClient =
 		ourRTSPClient::createNew(env, rtspURL, RTSP_CLIENT_VERBOSITY_LEVEL, "RTSP Client"/*"rtsp_thread"*/);
 	if (rtspClient == NULL) {

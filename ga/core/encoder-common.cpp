@@ -208,6 +208,7 @@ encoder_get_sinkserver() {
  */
 int
 encoder_register_client(void /*RTSPContext*/ *rtsp) {
+	ga_error("encoder_register_client\n");
 	pthread_rwlock_wrlock(&encoder_lock);
 	if(encoder_clients.size() == 0) {
 		// initialize video encoder
